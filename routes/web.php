@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CrudController;
 use App\Http\Controllers\MainController;
 
 use App\Http\Controllers\ProfileController;
@@ -45,12 +46,12 @@ Route::fallback(function () {
 //Route::post("set_lang", [LangController::class, "__invoke"]);
 Route::post("set_lang",LangController::class)->name("set_lang");
 
-Route::resource("projects", ProjectController::class)->middleware('auth');
-Route::resource("teachers", TeacherController::class)->middleware('auth');
-
-Route::resource("users", UserController::class)->middleware('auth');
-
-
-
-
-
+Route::get("{resource}", [CrudController::class,"index"])->name("crud.index"); //Listado
+//Crear un recurso
+Route::get("{resource}/create", [CrudController::class,"create"])->name("crud.create"); //create
+Route::post("{resource}", [CrudController::class,"store"])->name("crud.store");
+//Borrado
+Route::delete("{resource}/{id}", [CrudController::class,"destroy"])->name("crud.destroy");
+//Actualizacion
+Route::get("{resource}/{id}/edit", [CrudController::class,"edit"])->name("crud.edit");
+Route::get("{resource}/{id}", [CrudController::class,"update"])->name("crud.update");
