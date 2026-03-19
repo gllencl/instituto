@@ -30,7 +30,7 @@
                      overflow-y-auto">
 
             {{-- Ejemplo de tarjetas --}}
-            @foreach(config("resources") as $resource)
+            @foreach(config("resources") as $resource=>$data)
                 <x-card :label='__("Ver $resource")'
                         :img='asset("/images/$resource.jpeg")'
                         title="Gestión de {{$resource}}"
